@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
-	#has_many :statuses, dependent: :destroy
-	#has_many :likes, dependent: :destroy
+	has_many :statuses, dependent: :destroy
+	has_many :likes, dependent: :destroy
 
 	 def has_valid_email
 	   if (self.email =~ /\w+@\w+.\w+/).nil?
