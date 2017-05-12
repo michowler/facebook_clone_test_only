@@ -3,14 +3,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:session][:email]).try(:authenticate, params[:session][:password])
-    unless @user == nil || false
+    @user = User.find_by(email: params[:session][:email])
+   
+    if @user && @user.authenticate(params[:session][:password])
       flash[:notice] = "Welcome, #{@user.email}!"
       session[:user_id] = @user.id
       redirect_to "/statuses"
-    else
+
+    else @user == nil
       flash[:alert] = "Please log in again"
-      render "new"
+      render "new"  
+      
     end
   end
 
@@ -18,4 +21,5 @@ class SessionsController < ApplicationController
     session.delete(:user_id)
     redirect_to "/"
   end
+
 end

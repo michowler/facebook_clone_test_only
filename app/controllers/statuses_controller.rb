@@ -7,10 +7,10 @@ class StatusesController < ApplicationController
   def create
   	@status = Status.new(status_params)
   	if @status.save
-  	  flash[:notice] = "Status created successfully."
+  	  flash[:notice] = "Status is created successfully."
   	  redirect_to status_path(@status.id)
   	else
-  	  flash[:alert] = @status.errors.full_messages
+  	  flash[:alert] = "Error creating status."
   	  render :new
   	end
   end
@@ -21,7 +21,7 @@ class StatusesController < ApplicationController
   def update
   	@status = Status.find(params[:id])
     if @status.update(status_params)
-      flash[:notice] = "Status updated successfully."
+      flash[:notice] = "Status is updated successfully."
 	  redirect_to @status
     else
   	  render :edit
@@ -30,7 +30,7 @@ class StatusesController < ApplicationController
 
   def destroy
   	@status = Status.find(params[:id]).destroy
-  	flash[:notice] = "Status deleted."
+  	flash[:notice] = "Status is deleted."
   	redirect_to statuses_path
   end
 

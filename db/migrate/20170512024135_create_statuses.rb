@@ -3,7 +3,7 @@ class CreateStatuses < ActiveRecord::Migration
     create_table :statuses do |t|
       t.string :title
       t.text :content
-      t.integer :user, index: true
+      t.references :user
 
       t.timestamps null: false
     end

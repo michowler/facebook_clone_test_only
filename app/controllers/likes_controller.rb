@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     @status = Status.find(params[:like][:status])
 
     unless Like.find_by(user_id: session[:user_id], status_id: @status.id).nil?
-      flash[:alert] = "You liked before, don't spam!"
+      flash[:alert] = "You liked before!"
       redirect_to "/"
       return
     end
@@ -20,7 +20,7 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
     @status = Status.find(@like.status_id)
     @like.destroy
-    flash[:notice] = "You unlike your best friend's status."
+    flash[:notice] = "You unlike."
     redirect_to @status
   end
 
